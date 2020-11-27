@@ -11,8 +11,8 @@ const Header = ({ siteTitle, isHome }) => (
       >
         {
           isHome
-          ? <img src='/static/logo_white.svg' alt={siteTitle} id='logo' />
-          : <img src='/static/chochin.svg' alt={siteTitle} id='chochin-logo'/>
+          ? <img src='/logo_white.svg' alt={siteTitle} id='logo' />
+          : <img src='/chochin.svg' alt={siteTitle} id='chochin-logo'/>
         }
       </Link>
       {
