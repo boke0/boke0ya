@@ -8,11 +8,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import "../styles/common.scss"
 
 import Header from "./header"
-import "./layout.module.scss"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, isHome }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -25,21 +25,11 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer style={{
-          marginTop: `2rem`
-        }}>
-          ©木瓜丸 2020 -
-        </footer>
-      </div>
+      <Header siteTitle={data.site.siteMetadata?.title || `Title`} isHome={isHome}/>
+      <main>{children}</main>
+      <footer>
+        © 2020 木瓜丸.
+      </footer>
     </>
   )
 }

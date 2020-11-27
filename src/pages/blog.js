@@ -1,32 +1,29 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 import Layout from '../components/layout'
-import SEO from "../components/seo"
-import WorkList from '../components/work-list'
+import BlogList from '../components/blog-list'
 
-const WorksPage = ({
+const BlogsPage = ({
   data: {
     allMarkdownRemark: { edges }
   }
 }) => {
-  const works = edges
+  const blogs = edges
     .filter(edge => !!edge.node.frontmatter.date)
-    .map(edge => <WorkList key={edge.node.id} post={edge.node} />)
-
+    .map(edge => <BlogList key={edge.node.id} post={edge.node} />)
   return (
     <Layout>
-      <SEO title="作品集" />
-      <h1 className='page-title'>作品集</h1>
-      <div className='work-list'>
-        {works}
+      <h1 className='page-title'>書き物</h1>
+      <div className='blog-list'>
+        {blogs}
       </div>
     </Layout>
   )
 }
-
 export const pageQuery = graphql`
   query {
     allMarkdownRemark(
-      filter: { fields: { collection: { eq: "works" } } },
+      filter: { fields: { collection: { eq: "blog" } } },
       sort: { order: DESC, fields: [frontmatter___date] }
     ) {
       edges {
@@ -54,4 +51,4 @@ export const pageQuery = graphql`
   }
 `
 
-export default WorksPage
+export default BlogsPage

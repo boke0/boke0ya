@@ -17,8 +17,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `work`,
-        path: `${__dirname}/src/md/work`,
+        name: `works`,
+        path: `${__dirname}/src/md/works`,
       },
     },
     {
@@ -29,6 +29,8 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
+    `gatsby-transformer-remark-plaintext`,
+    `gatsby-remark-images`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

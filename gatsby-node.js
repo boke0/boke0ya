@@ -28,9 +28,9 @@ exports.onCreateNode = ({node, getNode, actions}) => {
   }
 }
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  return graphql(`
+  const result = await graphql(`
     {
       allMarkdownRemark {
         edges {
@@ -46,15 +46,19 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     }
-  `).then(result => {
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-      createPage({
-        path: node.frontmatter.slug,
-        component: path.resolve(`./src/templates/blog-page.js`),
-        context: {
-          slug: node.frontmatter.slug
-        }
-      })
+  `)
+  if(result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query`)
+    return
+  }
+  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    console.log(node.fields.collection)
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve(`./src/templates/${node.fields.collection}-page.js`),
+      context: {
+        slug: node.fields.slug
+      }
     })
   })
 }

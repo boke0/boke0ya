@@ -4,7 +4,7 @@ import Image from 'gatsby-image'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
-const BlogPage = ({data}) => {
+const WorkPage = ({location, data}) => {
   const { markdownRemark } = data
   const { frontmatter, html } = markdownRemark
   return (
@@ -35,9 +35,9 @@ const BlogPage = ({data}) => {
   )
 }
 
-export default BlogPage
+export default WorkPage
 export const pageQuery = graphql`
-  query blogPage($slug: String!) {
+  query($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug }}) {
       html
       frontmatter {
