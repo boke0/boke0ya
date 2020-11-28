@@ -57,7 +57,7 @@ header {
             display: block;
             position: absolute;
             top: -32px;
-            left: 0;
+            left: 8px;
             width: 64px;
             height: auto;
         }
@@ -67,7 +67,7 @@ header {
             height: 100px;
             grid-gap: 8px;
             position: absolute;
-            right: 0;
+            right: 8px;
             .item {
                 color: #111;
                 background: #fff;
@@ -90,8 +90,13 @@ main {
     padding: 0 24px;
     .page-title{
         text-align: center;
-        margin-top: 64px;
         margin-bottom: 48px;
+        @include pc {
+            margin-top: 64px;
+        }
+        @include sp {
+            margin-top: 80px;
+        }
     }
     .section-title{
         text-align: center;
