@@ -9,22 +9,16 @@ const BlogPage = ({data}) => {
   const { frontmatter, html } = markdownRemark
   return (
     <Layout>
-      <SEO title={frontmatter.title} />
+      <SEO title={frontmatter.title} thumbnail={frontmatter.topImage.childImageSharp.fluid.src} />
       <article>
-        <div class='hero'>
-          <Image fluid={frontmatter.topImage.childImageSharp.fluid} objectFit='cover' style={{
-            position: `absolute`,
-            top: 0,
-            left: 0,
-            width: `100%`,
-            height: `100%`
-          }}/>
+        <div className='hero'>
+          <Image fluid={frontmatter.topImage.childImageSharp.fluid} objectFit='cover'/>
         </div>
-        <div class='detail'>
-          <div class='date'>
+        <div className='detail'>
+          <div className='date'>
             {frontmatter.date}
           </div>
-          <h1 class='title'>{frontmatter.title}</h1>
+          <h1 className='title'>{frontmatter.title}</h1>
         </div>
         <div
           className='content'

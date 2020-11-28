@@ -2,7 +2,8 @@ module.exports = {
   siteMetadata: {
     title: `木瓜丸屋`,
     description: `木瓜丸です。プログラムを組み、デザインし、回路を弄る生活をしています。世界中の人を怠惰の沼に鎮めるのが夢です。`,
-    author: `@gatsbyjs`,
+    author: `@boke_0`,
+    siteUrl: `https://boke0.netlify.app`
   },
   plugins: [
     `gatsby-plugin-sass`,

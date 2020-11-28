@@ -9,7 +9,6 @@ const WorksPage = ({
   }
 }) => {
   const works = edges
-    .filter(edge => !!edge.node.frontmatter.date)
     .map(edge => <WorkList key={edge.node.id} post={edge.node} />)
 
   return (
@@ -38,8 +37,9 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
             title
+            url
+            skills
             topImage {
               childImageSharp {
                 fluid(maxWidth: 1280) {

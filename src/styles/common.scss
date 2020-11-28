@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP&family=Sawarabi+Mincho&family=Lora&display=swap');
+@import url('https://use.fontawesome.com/releases/v5.5.0/css/all.css');
 
 @font-face {
     font-family: 'harenosora';
@@ -199,18 +200,15 @@ main {
     }
     article {
         padding: 96px 0;
-        .hero {
-            display: block;
-            position: relative;
-            overflow: hidden;
-            &::before {
-                content: '';
-                display: block;
-                padding-top: 63.5%;
-            }
-        }
         .detail {
             padding: 24px 0;
+            a h1::after {
+                content: '\f35d';
+                font-size: 0.9rem;
+                margin: 0 7px;
+                font-weight: 900;
+                font-family: 'Font Awesome 5 Free';
+            }
             .date {
                 font-size: 0.9rem;
             }
