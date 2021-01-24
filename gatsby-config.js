@@ -41,6 +41,9 @@ module.exports = {
       options: {
         plugins: [
           {
+            resolve: `gatsby-remark-images`,
+          },
+          {
             resolve: `gatsby-remark-katex`,
             options: {
               strict: `ignore`
