@@ -36,7 +36,19 @@ module.exports = {
         path: `${__dirname}/src/md/blog/`,
       },
     },
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-katex`,
+            options: {
+              strict: `ignore`
+            }
+          }
+        ]
+      }
+    },
     `gatsby-transformer-remark-plaintext`,
     `gatsby-remark-images`,
     `gatsby-transformer-sharp`,
