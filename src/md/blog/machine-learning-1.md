@@ -28,15 +28,15 @@ $$
 
 ちなみに、微分は英語で*differentiation*だそうです。
 
-```python
+```rust
+const H: f32 = 0.0001;
 
-H = 0.0001
-
-def diff(f, x):
-    a = x + H/2
-    b = x - H/2
-    return (f(a) - f(b)) / H
-
+fn diff<F>(f: F, x: f32) -> f32
+    where F: Fn(f32) -> f32 {
+    let a = x + H/2.0;
+    let b = x + H/2.0;
+    f(a) - f(b) / H
+}
 ```
 
 ポイントなんですが、微分の定義そのままではなく、微分したい点の前後をとって平均変化率を求めています。
@@ -69,70 +69,81 @@ $$
 では、勾配を求める関数を作ってみましょう。
 ちなみに、勾配は英語で*gradient*だそうです。
 
-```python
-def grad(f, x):
-    g = list()
-    for i in range(len(x)):
-        t = x[i]
-        x[i] = t + H/2
-        ya = f(*x)
-        x[i] = t - H/2
-        yb = f(*x)
-        d = (ya - yb) / H
-        g[i].append(d)
-        x[i] = t
-    return g
+```rust
+const H: f32 = 0.0001;
+
+fn grad<F>(f: F, x: Vec<f32>) -> Vec<f32>
+    where F: Fn(Vec<f32>) -> f32 {    
+    let mut g = Vec::new();
+    for i in 0..x.len() {
+        let mut x_a = x.clone();
+        x_a[i] = x_a[i] + H / 2.0;
+        let ya = f(x_a);
+        let mut x_b = x.clone();
+        x_b[i] = x_b[i] - H / 2.0;
+        let yb = f(x_b);
+        g.push((ya - yb) / H);
+    }
+    g 
+}
 ```
 
 今考えた関数$$f(x_0, x_1)$$はちょうど2変数関数なので、勾配のベクトルを二次元のグラフにマップしてみてみましょう。
 
-```python
-import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
-matplotlib.use('Agg')
+```rust
+extern crate plotlib;
 
-#微分する関数
-H = 0.0001
+use plotlib::page::Page;
+use plotlib::repr::Plot;
+use plotlib::style::{PointMarker, PointStyle, LineStyle};
+use plotlib::view::ContinuousView;
 
-def grad(f, x):
-    g = list()
-    for i in range(len(x)):
-        t = x[i]
-        x[i] = t + H/2
-        ya = f(*x)
-        x[i] = t - H/2
-        yb = f(*x)
-        d = (ya - yb) / H
-        g.append(d)
-        x[i] = t
-    return g
+const H: f32 = 0.0001;
 
-def subsq(x0, x1):
-    return x0**2 + x1**2
+fn grad<F>(f: F, x: Vec<f32>) -> Vec<f32>
+    where F: Fn(Vec<f32>) -> f32 {    
+    let mut g = Vec::new();
+    for i in 0..x.len() {
+        let mut x_a = x.clone();
+        x_a[i] = x_a[i] + H / 2.0;
+        let ya = f(x_a);
+        let mut x_b = x.clone();
+        x_b[i] = x_b[i] - H / 2.0;
+        let yb = f(x_b);
+        g.push((ya - yb) / H);
+    }
+    g 
+}
 
-fig = plt.figure(figsize = (32, 32))
-ax = fig.add_subplot(1, 1, 1)
-
-ax.grid()
-
-ax.set_xlabel('x0', fontsize = 16)
-ax.set_ylabel('x1', fontsize = 16)
-
-ax.set_xlim(-2, 2)
-ax.set_ylim(-2, 2)
-
-ax.axhline(0, color='gray')
-ax.axvline(0, color='gray')
-
-for i in range(32):
-    for j in range(32):
-        x0 = float(i - 16) / 8.0
-        x1 = float(j - 16) / 8.0
-        (x0_, x1_) = grad(subsq, [x0, x1])
-        ax.quiver(x0, x1, x0_, x1_, color='red', angles='xy', scale_units='xy', scale=1)
-
-plt.savefig('graph.png')
+fn main() {
+    let subsq = |x: Vec<f32>| x[0] * x[0] + x[1] * x[1];
+    let mut g = Vec::new();
+    for i in -8..=8 {
+        for j in -8..=8 {
+            let i_ = (i as f32) / 4.0;
+            let j_ = (j as f32) / 4.0;
+            let g_ = grad(subsq, vec![i_, j_]);
+            let i__ = i_ as f64;
+            let j__ = j_ as f64;
+            g.push(vec![(i__, j__), ((g_[0] * -0.075) as f64 + i__, (g_[1] * -0.075) as f64 + j__)]);
+        }
+    }
+    let mut v = ContinuousView::new();
+    for g_ in g {
+        let s1: Plot = Plot::new(g_.clone()).line_style(
+            LineStyle::new().colour("#35c799")
+        );
+        let s2: Plot = Plot::new(vec![g_.clone()[0]]).point_style(
+            PointStyle::new().colour("#35c799")
+        );
+        v = v.add(s1).add(s2);
+    }
+    let v = v.x_range(-2.0, 2.0)
+        .y_range(-2.0, 2.0)
+        .x_label("x0")
+        .y_label("x1");
+    Page::single(&v).save("graph.svg").unwrap();
+}
 ```
 
 ![graph.png](./pics/graph.png)
@@ -144,6 +155,3 @@ plt.savefig('graph.png')
 次の記事で勾配降下法を実装してみようと思います。
 
 一緒に勉強しましょうー(^o^)
-
-### 追記
-勢いでPythonで書き始めましたが、次からRustで書きます。
