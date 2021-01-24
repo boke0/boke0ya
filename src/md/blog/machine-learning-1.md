@@ -155,3 +155,7 @@ fn main() {
 次の記事で勾配降下法を実装してみようと思います。
 
 一緒に勉強しましょうー(^o^)
+
+### 参考文献
+
+![斎藤 康毅『ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装』](https://www.amazon.co.jp/dp/4873117585/ref=cm_sw_r_tw_dp_..vdGbQCZBZE1)
