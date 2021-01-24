@@ -44,6 +44,9 @@ module.exports = {
             resolve: `gatsby-remark-images`,
           },
           {
+            resolve: `gatsby-remark-prismjs`
+          },
+          {
             resolve: `gatsby-remark-katex`,
             options: {
               strict: `ignore`

@@ -4,6 +4,7 @@ import Image from 'gatsby-image'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import "katex/dist/katex.min.css"
+import "prismjs/themes/prism-okaidia.css"
 
 const BlogPage = ({data}) => {
   const { markdownRemark } = data
