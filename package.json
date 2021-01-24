@@ -26,6 +26,7 @@
     "gatsby-remark-images": "^3.6.0",
     "gatsby-remark-katex": "^3.9.0",
     "gatsby-transformer-remark-plaintext": "^1.0.3",
+    "katex": "^0.12.0",
     "node-sass": "^4.14.1",
     "prettier": "2.1.2"
   },

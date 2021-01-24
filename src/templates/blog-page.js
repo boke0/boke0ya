@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import Image from 'gatsby-image'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
+import "katex/dist/katex.min.css"
 
 const BlogPage = ({data}) => {
   const { markdownRemark } = data
