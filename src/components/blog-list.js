@@ -26,6 +26,7 @@ const BlogList = ({ post }) => {
         <h4 className='title'>
           { post.frontmatter.title }
         </h4>
+        <p className='description'>{ post.plainText.slice(0, 70) }...</p>
       </div>
     </Link>
   )
