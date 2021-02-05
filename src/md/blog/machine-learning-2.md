@@ -2,6 +2,7 @@
 date: 2021-01-30
 title: 機械学習のお勉強【其の弐】 行列演算を実装するぞ
 topImage: ./hero/machine-learning-2.png
+draft: true
 ---
 
 木瓜丸です。

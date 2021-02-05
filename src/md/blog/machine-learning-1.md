@@ -2,6 +2,7 @@
 date: 2021-01-24
 title: 機械学習のお勉強【其の壱】 微分と勾配を実装するぞ
 topImage: ./hero/machine-learning-1.png
+draft: true
 ---
 
 木瓜丸です。

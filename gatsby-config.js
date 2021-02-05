@@ -57,6 +57,7 @@ module.exports = {
     },
     `gatsby-transformer-remark-plaintext`,
     `gatsby-remark-images`,
+    `gatsby-plugin-draft`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
