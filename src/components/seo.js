@@ -65,7 +65,7 @@ function SEO({ description, lang, meta, title, thumbnail }) {
         },
         {
           name: `twitter:image`,
-          content: site.siteMetadata.siteUrl + thumbnail,
+          content: site.siteMetadata.siteUrl + thumbnail ? thumbnail : '/static/ogp-thumbnail.png',
         },
         {
           name: `twitter:description`,

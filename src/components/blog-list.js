@@ -10,6 +10,7 @@ const BlogList = ({ post }) => {
       color: `inherit`,
       textDecoration: `none`
     }} className='blog-list-item'>
+      {/*
       <div className='thumbnail'>
         <Image fluid={post.frontmatter.topImage.childImageSharp.fluid} objectFit='cover' style={{
           position: `absolute`,
@@ -19,6 +20,7 @@ const BlogList = ({ post }) => {
           height: `100%`
         }}/>
       </div>
+      */}
       <div className='details'>
         <div className='date'>
           { post.frontmatter.date }

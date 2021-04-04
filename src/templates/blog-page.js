@@ -11,11 +11,13 @@ const BlogPage = ({data}) => {
   const { frontmatter, html } = markdownRemark
   return (
     <Layout>
-      <SEO title={frontmatter.title} thumbnail={frontmatter.topImage.childImageSharp.fluid.src} />
+      <SEO title={frontmatter.title} />
       <article>
+        {/*
         <div className='hero'>
           <Image fluid={frontmatter.topImage.childImageSharp.fluid} objectFit='cover'/>
         </div>
+        */}
         <div className='detail'>
           <div className='date'>
             {frontmatter.date}
@@ -39,13 +41,13 @@ export const pageQuery = graphql`
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title
-        topImage {
-          childImageSharp {
-            fluid(maxWidth: 1280) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
+        #topImage {
+        #  childImageSharp {
+        #    fluid(maxWidth: 1280) {
+        #      ...GatsbyImageSharpFluid
+        #    }
+        #  }
+        #}
       }
     }
   }
